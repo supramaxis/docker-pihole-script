@@ -17,7 +17,7 @@ docker run -d \
 
 printf 'Starting up pihole container '
 for i in $(seq 1 20); do
-    if [ "$(docker inspect -f "{{.State.Health.Status}}" pihole)" == "healthy" ] ; then
+    if [ "$(docker inspect -f "{{json .State.Health}}" pihole)" == "healthy" ] ; then
         printf ' OK'
         echo -e "\n$(docker logs pihole 2> /dev/null | grep 'password:') for your pi-hole: https://${IP}/admin/"
         exit 0
